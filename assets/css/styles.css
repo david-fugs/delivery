@@ -1,6 +1,7 @@
 :root {
     --main1: #58121e;
     --main2: #c99b07;
+    --main3: #e8efff;
     --notification: #ff3d00;
     --blanco: #ffffff;
 }
@@ -13,6 +14,7 @@
 
 body {
     overflow-x: hidden;
+    background-color: var(--main3);
 }
 
 ul {
@@ -285,11 +287,15 @@ h2 {
         cursor: pointer;
     }
 
+    & .inputsForm {
+        padding: 0 5%;
+    }
+
     & input {
         padding: 10px;
-        width: 80%;
+        width: 100%;
         border: 1px solid #ccc;
-        border-radius: 8px;
+        border-radius: 2rem;
     }
 
     & input::placeholder {
@@ -298,16 +304,24 @@ h2 {
         color: #ccc;
     }
 
-    & input#btn-login {
-        width: 40%;
+    & input#btn-login,
+    & input#btn-register {
+        width: 50%;
         background-color: var(--main1);
         color: var(--blanco);
 
-        &#btn-login:hover {
+        &#btn-login:hover,
+        &#btn-register:hover {
             background-color: var(--main2);
             cursor: pointer;
         }
     }
+
+    & #inpt-email,
+    & #inpt-pass {
+        border: 1px solid var(--main1);
+    }
+
 
     &.active {
         display: flex;
@@ -355,7 +369,7 @@ footer {
             color: var(--main2);
             border: 1px solid var(--blanco);
             box-shadow: 3px 5px 8px black inset;
-            transition: all 0.3s ease;
+            transition: all 0.9ms ease;
         }
     }
 }

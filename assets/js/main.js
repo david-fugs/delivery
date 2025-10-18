@@ -35,3 +35,9 @@ window.addEventListener('scroll', function () {
     let scrollPosition = window.pageYOffset;
     parallax.style.transform = 'translateX(' + scrollPosition * 0.3 + 'px) rotate(11deg)';
 });
+// Efecto parallax titulo principal del nombre del resturante
+window.addEventListener('scroll', function () {
+    const parallax = document.querySelector('#myBrand');
+    let scrollPosition = window.pageYOffset;
+    parallax.style.transform = 'translateX(' + scrollPosition * -0.3 + 'px)';
+});

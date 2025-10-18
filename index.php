@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=BBH+Sans+Hegarty&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="shortcut icon" href="assets/img/pizza-sin-fondo.png" />
-    <title>Tio Burguer</title>
+    <title>TinBurguer</title>
 </head>
 <body>
     <header>
@@ -46,7 +46,7 @@
     <div class="hamb-banner">
         <div class="img-banner">
             <span class="burguerOut" id="burguerFloat"></span>
-            <h1 class="brand">TinBurguer</h1>
+            <h1 class="brand" id="myBrand">TinBurguer</h1>
         </div>
     </div>
     <div class="container">
@@ -136,20 +136,24 @@
                 <h3 class="d-flex align-items-center justify-content-center m-0">Bienvenido... <span class="main-logo"></span></h3>
                 <?php 
                     include("login.php");
+                    include("register.php");
                 ?>
                 <div class="inputsForm">
                     <fieldset class="d-flex flex-column align-items-center justify-content-center">
                         <div class="data-users w-100">
                             <label for="" class="d-flex flex-column justify-content-center  text-start">Email
-                                <input class="my-3" type="email" name="email" id="inp-email" placeholder="Ingresa tu email" require>
+                                <input class="my-3" type="email" name="email" id="inpt-email" placeholder="Ingresa tu email" require>
                             </label>         
                         </div>
                         <div class="data-users w-100">
                             <label for="" class="d-flex flex-column justify-content-center  text-start">Contraseña
-                                <input class="my-3" type="password" name="contrasena"   id="inp-pass" placeholder="Ingresa tu contraseña" require>
+                                <input class="my-3" type="password" name="contrasena"   id="inpt-pass" placeholder="Ingresa tu contraseña" require>
                             </label>
                         </div>
-                        <input type="submit" value="Iniciar Sesion" id="btn-login" name="btn-login" class="mt-4">
+                        <div class="buttonsForm d-flex w-auto">
+                            <input type="submit" value="Iniciar Sesión" id="btn-login" name="btn-login" class="mt-4 mx-2">
+                            <input type="submit" value="Registrarse" id="btn-register" name="btn-register" class="mt-4 mx-2">
+                        </div>
                     </fieldset>
                 </div>
             </form>
