@@ -10,6 +10,9 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "BBH Sans Hegarty", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 body {
@@ -44,6 +47,52 @@ a {
     background-repeat: no-repeat;
     width: 80px;
     height: 80px;
+}
+
+/*Estilos globales para elementos dentro de un formulario*/
+form {
+    & label {
+        color: var(--main1);
+    }
+
+    & .inputsForm {
+        padding: 0 5%;
+    }
+
+    & input,
+    & a#btn-go-register,
+    & input#btn-register {
+        padding: 10px;
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 2rem;
+    }
+
+    & input::placeholder {
+        font-family: sans-serif;
+        font-weight: 100;
+        color: #ccc;
+    }
+
+    & input#btn-login,
+    & a#btn-go-register,
+    & input#btn-register {
+        width: 50%;
+        background-color: var(--main1);
+        color: var(--blanco);
+
+        &#btn-login:hover,
+        &#btn-register:hover,
+        & a#btn-go-register:hover {
+            background-color: var(--main2);
+            cursor: pointer;
+        }
+    }
+
+    & #inpt-email,
+    & #inpt-pass {
+        border: 1px solid var(--main1);
+    }
 }
 
 header {
@@ -257,6 +306,7 @@ h2 {
     }
 }
 
+
 /* estilos generales POPUP*/
 .popUp {
     position: absolute;
@@ -287,40 +337,7 @@ h2 {
         cursor: pointer;
     }
 
-    & .inputsForm {
-        padding: 0 5%;
-    }
 
-    & input {
-        padding: 10px;
-        width: 100%;
-        border: 1px solid #ccc;
-        border-radius: 2rem;
-    }
-
-    & input::placeholder {
-        font-family: sans-serif;
-        font-weight: 100;
-        color: #ccc;
-    }
-
-    & input#btn-login,
-    & input#btn-register {
-        width: 50%;
-        background-color: var(--main1);
-        color: var(--blanco);
-
-        &#btn-login:hover,
-        &#btn-register:hover {
-            background-color: var(--main2);
-            cursor: pointer;
-        }
-    }
-
-    & #inpt-email,
-    & #inpt-pass {
-        border: 1px solid var(--main1);
-    }
 
 
     &.active {

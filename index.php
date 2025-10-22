@@ -1,6 +1,3 @@
-<?php
-    
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +24,7 @@
                                     <a href="#" class="px-3">Hacer un pedido <i class="fa-solid fa-truck px-2"></i></a>
                                 </li>
                                 <li>
-                                    <a href="#" class="px-3" id="goLogin">Iniciar sesion 
+                                    <a class="px-3" id="goLogin">Iniciar sesion 
                                     <i class="fa-regular fa-circle-user px-2"></i></a>
                                 </li>
                                 <li>
@@ -132,12 +129,8 @@
     <div class="popUp">
         <div class="login w-100">
             <span class="close-popUp" id="close-popUp" onclick="closeLoginPopUp()"><i class="fa-solid fa-xmark"></i></span>
-            <form action="" method="post" class="d-flex flex-column">
+            <form action="login.php" method="post" class="d-flex flex-column">
                 <h3 class="d-flex align-items-center justify-content-center m-0">Bienvenido... <span class="main-logo"></span></h3>
-                <?php 
-                    include("login.php");
-                    include("register.php");
-                ?>
                 <div class="inputsForm">
                     <fieldset class="d-flex flex-column align-items-center justify-content-center">
                         <div class="data-users w-100">
@@ -152,7 +145,7 @@
                         </div>
                         <div class="buttonsForm d-flex w-auto">
                             <input type="submit" value="Iniciar Sesión" id="btn-login" name="btn-login" class="mt-4 mx-2">
-                            <input type="submit" value="Registrarse" id="btn-register" name="btn-register" class="mt-4 mx-2">
+                            <a href="user_register.php" id="btn-go-register" class="mt-4 mx-2">Registrarse</a>
                         </div>
                     </fieldset>
                 </div>
