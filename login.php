@@ -16,7 +16,7 @@
 
             if ($resultado && $datos = $resultado->fetch_object()) { //condicional que verifica si la consulta devolvio algun resultado
                 $_SESSION["id_user"] = $datos->id_user; // Guarda el ID del usuario en la sesión
-                header("location: prueba.php");
+                header("location: main_admin.php");
                 exit();
             } else {
                 echo '<div class="alert alert-danger">Acceso denegado</div>';

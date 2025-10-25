@@ -306,6 +306,10 @@ h2 {
     }
 }
 
+.left-side-menu,
+.right-side-menu {
+    background-color: var(--blanco);
+}
 
 /* estilos generales POPUP*/
 .popUp {

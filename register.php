@@ -22,7 +22,7 @@
             echo '<div class="alert alert-danger">El email ya está registrado</div>';
         } else {
             // Insertar nuevo usuario
-            $query = "INSERT INTO usuarios (nombre_usuario, apellido_usuario, email, contrasena) VALUES ('$user_name','$user_last_name','$email', '$passwd')"; // Ajustar columnas y valores
+            $query = "INSERT INTO usuarios (nombre_usuario, apellido_usuario, email, contrasena,rol) VALUES ('$user_name','$user_last_name','$email', '$passwd', '$rol')"; // Ajustar columnas y valores
             $result = mysqli_query($mysqli, $query);
             if($result){
                 echo '<div class="alert alert-success">Registro exitoso. <a href="login.php">Iniciar sesión</a></div>';
