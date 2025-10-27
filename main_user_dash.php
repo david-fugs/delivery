@@ -3,13 +3,13 @@
 ?>
 <!DOCTYPE html>
 <html lang="en">
-    <header class="py-4">
+    <header class="pb-4">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
                     <div class="info-header">
                         <nav class="d-flex justify-content-between align-items-center">
-                            <div class="">TinBurger</div>
+                            <div class="main-logo"></div>
                             <ul class="d-flex align-items-center">
                                 <li>
                                     <a href="#" class="px-2"><i class="fa-solid fa-truck px-2"></i></a>
@@ -37,27 +37,28 @@
             </div>
             <div class="row d-sm-none d-md-flex">
                 <div class="col-md-2 left-side-menu"><!-- menu lateral izquierdo -->
-                    <div class="sections">
-                        <ul>
-                            <li>
-                                <i class="fa-solid fa-house"></i>
-                                <a href="" class="mx-2">Incio</a>
+                    <div class="side-menu sections">
+                        <h5 class=" color-txt-main2 text-center my-5">TinBurguer</h5>
+                        <ul class="px-4 pb-5">
+                            <li class="option-side-menu py-3 my-2 px-4 active">
+                                <i class="fa-solid fa-house pe-3"></i>
+                                <a href="#" class="mx-2">Incio</a>
                             </li>
-                            <li>
-                                <i class="fa-solid fa-motorcycle"></i>
-                                <a href="" class="mx-2">Mi Pedido</a>
+                            <li class="option-side-menu py-3 my-3 px-4">
+                                <i class="fa-solid fa-motorcycle pe-3"></i>
+                                <a href="#" class="mx-2">Mi Pedido</a>
                             </li>
-                            <li>
-                                <i class="fa-solid fa-sack-dollar"></i>
-                                <a href="" class="mx-2">Pagos</a>
+                            <li class="option-side-menu py-3 my-3 px-4">
+                                <i class="fa-solid fa-sack-dollar pe-3"></i>
+                                <a href="#" class="mx-2">Pagos</a>
                             </li>
-                            <li>
-                                <i class="fa-solid fa-clock-rotate-left"></i>
-                                <a href="" class="mx-2">Historial de Pedidos</a>
+                            <li class="option-side-menu py-3 my-3 px-4">
+                                <i class="fa-solid fa-clock-rotate-left pe-3"></i>
+                                <a href="#" class="mx-2">Historial</a>
                             </li>
-                            <li>
-                                <i class="fa-solid fa-gear"></i>
-                                <a href="" class="mx-2">Ajustes</a>
+                            <li class="option-side-menu py-3 my-3 px-4">
+                                <i class="fa-solid fa-gear pe-3"></i>
+                                <a href="#" class="mx-2">Ajustes</a>
                             </li>
                         </ul>
                     </div>
@@ -67,7 +68,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="baner-promotions border border-primary">
-                                    <span><!-- imagen baner --></span>
+                                    <span><img src="assets/img/img-baner-descuentos.png" alt="Baner Descuentos"></span>
                                 </div>
                             </div>
                         </div>
@@ -174,6 +175,7 @@
             </div>
         </div>
     </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/7a0f7896d3.js" crossorigin="anonymous"></script>
 <script src="assets/js/main.js"></script>
 </html>

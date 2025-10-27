@@ -1,4 +1,4 @@
-<?php
+    <?php
     session_start(); // Inicia sesión
     ob_start();//Iniciar el buffer de salida
     include("conection.php");
@@ -9,6 +9,7 @@
         } else {
             $email = $_POST["email"];
             $passwd = $_POST["contrasena"];
+            $roles = [1 => "main_admin.php", 2 => "main_user_dash.php"];
             $sql = $mysqli -> prepare("SELECT * FROM usuarios WHERE email = ? AND contrasena  = ?"); //prepare usado como buena practica para evitar inyeccion sql, ? se usan como marcadores de posicion
             $sql -> bind_param("ss", $email, $passwd); //ss por que son dos strings, $email y $passwd son las variables que iran en los marcadores de posicion
             $sql -> execute(); //ejecuta la consulta 
@@ -16,8 +17,16 @@
 
             if ($resultado && $datos = $resultado->fetch_object()) { //condicional que verifica si la consulta devolvio algun resultado
                 $_SESSION["id_user"] = $datos->id_user; // Guarda el ID del usuario en la sesión
-                header("location: main_admin.php");
-                exit();
+
+                //Validar rol de usuario y vista
+                /* if($datos -> rol == $user_rol){ */ // 1 forma de validar roles  asignados en variables diferentes...
+                if(array_key_exists($datos -> rol, $roles)){// 2da forma de validar roles  dentro de un array...
+                    var_dump($datos->rol);
+                    header("location:" . $roles[$datos->rol]);
+                    exit();
+                }else {
+                    header("location: index.php");
+                }
             } else {
                 echo '<div class="alert alert-danger">Acceso denegado</div>';
             }

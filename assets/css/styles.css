@@ -194,6 +194,10 @@ h2 {
     }
 }
 
+.color-txt-main2 {
+    color: var(--main2);
+}
+
 .food-grid {
     display: grid;
     grid-template-columns: repeat(3, 2fr);
@@ -311,6 +315,43 @@ h2 {
     background-color: var(--blanco);
 }
 
+.side-menu {
+    & ul {
+        & li {
+            cursor: pointer;
+            border-radius: 20px;
+            color: var(--main1);
+            display: flex;
+            align-items: center;
+            position: relative;
+
+            & i {
+                font-size: 1.3rem;
+            }
+        }
+
+        & li:hover:after {
+            content: "\f060";
+            position: absolute;
+            top: calc(50% - 15px);
+            right: 3%;
+            font-size: 1.3rem;
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            color: var(--main1);
+        }
+
+        & li.active {
+            background-color: var(--main2);
+            color: var(--blanco);
+        }
+
+        & li.active:hover:after {
+            color: var(--blanco);
+        }
+    }
+}
+
 /* estilos generales POPUP*/
 .popUp {
     position: absolute;
@@ -421,7 +462,7 @@ footer {
 
         & .img-banner {
             & .burguerOut {
-                background-size: auto;
+                background-size: cover;
                 width: 50vw;
                 height: 72vh;
                 bottom: 0px;
@@ -449,5 +490,13 @@ footer {
 
     .food-3 {
         min-height: 600px;
+    }
+}
+
+@media (min-width: 1200px) {
+    & .img-banner {
+        & .burguerOut {
+            background-size: auto;
+        }
     }
 }

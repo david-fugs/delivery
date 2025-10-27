@@ -1,5 +1,5 @@
 <?php
-    include("main_header.php");
+    include("main_header_dash.php");
     session_start(); // Inicia la sesión o la continúa 
     if (!isset($_SESSION["id_user"])) {
         // Si no hay sesión iniciada, redirige al login
