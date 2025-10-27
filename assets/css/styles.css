@@ -437,7 +437,7 @@ footer {
 }
 
 /* MediaQuery para dispositivos por encima de tablets*/
-@media (min-width: 1024px) {
+@media (min-width: 1024px) and (max-width: 1199px) {
     ul {
         padding-left: 2rem;
     }
@@ -496,7 +496,7 @@ footer {
 @media (min-width: 1200px) {
     & .img-banner {
         & .burguerOut {
-            background-size: auto;
+            background-size: auto !important;
         }
     }
 }
