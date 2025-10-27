@@ -462,7 +462,7 @@ footer {
 
         & .img-banner {
             & .burguerOut {
-                background-size: auto;
+                background-size: cover;
                 width: 50vw;
                 height: 72vh;
                 bottom: 0px;
