@@ -668,6 +668,14 @@ footer {
     .food-3 {
         min-height: 600px;
     }
+
+    .baner-promotions {
+        height: 170px;
+
+        &>span {
+            font-size: 1.5em;
+        }
+    }
 }
 
 @media (min-width: 1400px) {
