@@ -4,6 +4,8 @@
     --main3: #e8efff;
     --notification: #ff3d00;
     --blanco: #ffffff;
+    --red1: #e5383b;
+    --star: #fdc500;
 }
 
 * {
@@ -31,12 +33,24 @@ a {
     color: inherit;
 }
 
+.color-main-title {
+    color: var(--main1);
+}
+
+.color-second-title {
+    color: var(--main2);
+}
+
 .my-100 {
     margin: 200px 0 200px 0;
 }
 
 .mb-100 {
     margin-bottom: 100px;
+}
+
+.calc-h-80 {
+    height: calc(100vh - 80px);
 }
 
 .main-logo {
@@ -436,6 +450,169 @@ footer {
     }
 }
 
+.baner-promotions {
+    height: 100px;
+    border-radius: 20px;
+    background: var(--main2) url(../img/mujer-comiendo.png);
+    background-size: contain;
+    background-position: right;
+    background-repeat: no-repeat;
+
+    &>span {
+        color: var(--blanco);
+        font-size: 2em;
+    }
+}
+
+.user-categories {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 1fr;
+
+    & li {
+        width: 150px;
+        height: 120px;
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--blanco);
+        cursor: pointer;
+        transition: transform .5s ease;
+
+        &:hover {
+            transform: rotate(3deg) scale(1.05);
+        }
+
+        & span {
+            font-size: .85em;
+        }
+
+        & .icon-categories {
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            height: 3em;
+            width: 3em;
+            display: block;
+        }
+
+        & .cat-ham {
+            background-image: url(../img/hamburguesa-color.png);
+        }
+
+        & .cat-hotDog {
+            background-image: url(../img/hot-dog-color.png);
+        }
+
+        & .cat-pizza {
+            background-image: url(../img/pizza-color.png);
+        }
+
+        & .cat-tipicFood {
+            background-image: url(../img/sopa-color.png);
+        }
+
+        & .cat-drinks {
+            background-image: url(../img/coctel-color.png);
+        }
+
+        & .cat-desserts {
+            background-image: url(../img/pastel-color.png);
+        }
+    }
+}
+
+.week-discounts {
+    display: grid;
+    grid-template-columns: repeat(3, 3fr);
+    grid-template-rows: 1fr;
+
+    & li {
+        width: 95%;
+        height: 200px;
+        border-radius: 10px;
+        position: relative;
+        background-color: var(--blanco);
+
+        & div>img {
+            width: 150px;
+            position: absolute;
+            top: 0;
+            right: calc(50% - 75px);
+        }
+
+        & .discount,
+        & .likes {
+            font-size: 1em;
+            color: var(--red1);
+            cursor: pointer;
+        }
+
+        & .discount {
+            background-color: var(--red1);
+            color: var(--blanco);
+            padding: 0 10px;
+            font-size: .7em;
+            border-radius: 0 5px 5px 0;
+        }
+    }
+
+    & .stars span i {
+        color: var(--star);
+        font-size: .77em;
+    }
+
+    & .cost-name-ham h6 {
+        font-size: .9em;
+        margin-bottom: 0;
+    }
+}
+
+.balance {
+    background-color: var(--main2);
+    width: 350px;
+    height: 150px;
+    border-radius: 20px;
+
+    & div {
+        background-color: var(--blanco);
+
+        & span {
+            color: var(--main1);
+            font-size: 1.5em;
+        }
+
+        &:first-child {
+            width: 135px;
+            height: 80px;
+            border-radius: 10px;
+        }
+
+        &:last-child {
+            width: 40px;
+            height: 40px;
+            border-radius: 5px;
+            cursor: pointer;
+            position: relative;
+
+            & span::after {
+                content: "Recargar";
+                display: block;
+                font-size: .4em;
+                font-weight: 400;
+                font-family: "BBH Sans Hegarty", sans-serif;
+                color: var(--blanco);
+                position: absolute;
+                bottom: -15px;
+                right: -7px;
+            }
+        }
+    }
+
+}
+
 /* MediaQuery para dispositivos por encima de tablets*/
 @media (min-width: 1024px) and (min-width: 1399px) {
     ul {
@@ -508,5 +685,9 @@ footer {
 
     .food-3 {
         min-height: 600px;
+    }
+
+    .baner-promotions {
+        height: 200px;
     }
 }

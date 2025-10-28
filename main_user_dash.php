@@ -35,7 +35,7 @@
             <div class="row d-md-none">
                 <div class="col-12"></div>
             </div>
-            <div class="row d-sm-none d-md-flex">
+            <div class="row d-sm-none d-md-flex calc-h-80">
                 <div class="col-md-2 left-side-menu"><!-- menu lateral izquierdo -->
                     <div class="side-menu sections">
                         <h5 class=" color-txt-main2 text-center my-5">TinBurguer</h5>
@@ -67,101 +67,106 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-12">
-                                <div class="baner-promotions border border-primary">
-                                    <span><img src="assets/img/img-baner-descuentos.png" alt="Baner Descuentos"></span>
+                                <div class="baner-promotions d-flex align-items-center ps-5">
+                                    <span>Obten  mayores descuentos de
+                                        <br>Hasta 40% en nuestra App.
+                                    </span>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <h4>Categorias</h4>
-                                <ul>
+                                <h4 class="color-main-title my-5">Categorias</h4>
+                                <ul class="user-categories">
                                     <li>
-                                        <span>Hamburguesas</span>
-                                        <i class="fa-solid fa-burger"></i>
+                                        <span class="color-second-title mt-2">Hamburguesas</span>
+                                        <span class="icon-categories cat-ham"></span>
                                     </li>
                                     <li>
-                                        <span>Perros Calientes</span>
-                                        <i class="fa-solid fa-hotdog"></i>
+                                        <span class="color-second-title mt-2">Perros Calientes</span>
+                                        <span class="icon-categories cat-hotDog"></span>
                                     </li>
                                     <li>
-                                        <span>Pizzas</span>
-                                        <i class="fa-solid fa-pizza-slice"></i>
+                                        <span class="color-second-title mt-2">Pizzas</span>
+                                        <span class="icon-categories cat-pizza"></span>
                                     </li>
                                     <li>
-                                        <span>Bebidas</span>
-                                        <i class="fa-solid fa-martini-glass-citrus"></i>
+                                        <span class="color-second-title mt-2">Bebidas</span>
+                                        <span class="icon-categories cat-drinks"></span>
                                     </li>
                                     <li>
-                                        <span>Comida Tipica</span>
-                                        <i class="fa-solid fa-bowl-food"></i>
+                                        <span class="color-second-title mt-2">Comida Tipica</span>
+                                        <span class="icon-categories cat-tipicFood"></span>
                                     </li>
                                     <li>
-                                        <span>Postres</span>
-                                        <i class="fa-solid fa-ice-cream"></i>
+                                        <span class="color-second-title mt-2">Postres</span>
+                                        <span class="icon-categories cat-desserts"></span>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <h4>Descuentos de la Semana</h4>
-                                <ul>
-                                    <li>
-                                        <span><!-- descuento --></span>
-                                        <span><!-- me gusta --></span>
-                                        <div><!-- img hamb --></div>
-                                        <div class="stars">
-                                            <span></span>
-                                            <span></span>
-                                            <span></span>
-                                            <span></span>
-                                            <span></span>
+                                <h4 class="color-main-title my-5">Descuentos de la Semana</h4>
+                                <ul class="week-discounts">
+                                    <li class="d-flex flex-column justify-content-between">
+                                        <div class="d-flex justify-content-between align-items-center pt-2 pe-4">
+                                            <span class="discount">25% Off</span>
+                                            <span class="likes"><i class="fa-solid fa-heart"></i></span>
                                         </div>
-                                        <div class="info-prom">
-                                            <div class="cost-name-ham">
-                                                <h6>hamburguer</h6>
-                                                <span class="priceHamb"></span>
+                                        <div><img src="assets/img/bacon-cheese.png" alt="Hamburguesa Cheese Bacon" class="d-block m-auto"></div>
+                                        <div class="info-prom ps-3 pb-2">
+                                            <div class="stars">
+                                                <span><i class="fa-solid fa-star"></i></span>
+                                                <span><i class="fa-solid fa-star"></i></span>
+                                                <span><i class="fa-solid fa-star"></i></span>
+                                                <span><i class="fa-solid fa-star"></i></span>
+                                                <span><i class="fa-solid fa-star"></i></span>
                                             </div>
-                                            <span><!-- agregar al carrito --></span>
+                                            <div class="cost-name-ham">
+                                                <h6 class="color-main-title">Angust</h6>
+                                                <span class="priceHamb"><b class="color-second-title">$</b>23.900</span>
+                                            </div>
                                         </div>
                                     </li>
-                                    <li>
-                                        <span><!-- descuento --></span>
-                                        <span><!-- me gusta --></span>
-                                        <div><!-- img hamb --></div>
-                                        <div class="stars">
-                                            <span></span>
-                                            <span></span>
-                                            <span></span>
-                                            <span></span>
-                                            <span></span>
+                                    <li class="d-flex flex-column justify-content-between">
+                                        <div class="d-flex justify-content-between align-items-center pt-2 pe-4">
+                                            <span class="discount">25% Off</span>
+                                            <span class="likes"><i class="fa-solid fa-heart"></i></span>
                                         </div>
-                                        <div class="info-prom">
-                                            <div class="cost-name-ham">
-                                                <h6>hamburguer</h6>
-                                                <span class="priceHamb"></span>
+                                        <div><img src="assets/img/doble-carne.png" alt="Hamburguesa doble carne" class="d-block m-auto"></div>
+                                        <div class="info-prom ps-3 pb-2">
+                                            <div class="stars">
+                                                <span><i class="fa-solid fa-star"></i></span>
+                                                <span><i class="fa-solid fa-star"></i></span>
+                                                <span><i class="fa-solid fa-star"></i></span>
+                                                <span><i class="fa-solid fa-star"></i></span>
+                                                <span><i class="fa-regular fa-star"></i></span>
                                             </div>
-                                            <span><!-- agregar al carrito --></span>
+                                            <div class="cost-name-ham">
+                                                <h6 class="color-main-title">Bacon Cheese</h6>
+                                                <span class="priceHamb"><b class="color-second-title">$</b>23.900</span>
+                                            </div>
                                         </div>
                                     </li>
-                                    <li>
-                                        <span><!-- descuento --></span>
-                                        <span><!-- me gusta --></span>
-                                        <div><!-- img hamb --></div>
-                                        <div class="stars">
-                                            <span></span>
-                                            <span></span>
-                                            <span></span>
-                                            <span></span>
-                                            <span></span>
+                                    <li class="d-flex flex-column justify-content-between">
+                                        <div class="d-flex justify-content-between align-items-center pt-2 pe-4">
+                                            <span class="discount">25% Off</span>
+                                            <span class="likes"><i class="fa-regular fa-heart"></i></span>
                                         </div>
-                                        <div class="info-prom">
-                                            <div class="cost-name-ham">
-                                                <h6>hamburguer</h6>
-                                                <span class="priceHamb"></span>
+                                        <div><img src="assets/img/queso-doble-carne.png" alt="Hmburguesa queso doble carne" class="d-block m-auto"></div>
+                                        <div class="info-prom ps-3 pb-2">
+                                            <div class="stars">
+                                                <span><i class="fa-solid fa-star"></i></span>
+                                                <span><i class="fa-solid fa-star"></i></span>
+                                                <span><i class="fa-solid fa-star"></i></span>
+                                                <span><i class="fa-regular fa-star"></i></span>
+                                                <span><i class="fa-regular fa-star"></i></span>
                                             </div>
-                                            <span><!-- agregar al carrito --></span>
+                                            <div class="cost-name-ham">
+                                                <h6 class="color-main-title">Doble Queso</h6>
+                                                <span class="priceHamb"><b class="color-second-title">$</b>23.900</span>
+                                            </div>
                                         </div>
                                     </li>
                                 </ul>
@@ -170,7 +175,16 @@
                     </div>
                 </div>
                 <div class="col-md-3 right-side-menu"><!-- menu lateral derecho -->
-
+                    <h5 class="color-main-title my-5 ms-3">Creditos...</h6>
+                    <div class="balance d-flex align-items-center justify-content-center m-auto">
+                        <div class="d-flex align-items-center justify-content-center flex-column me-3">
+                            <h6>Tu credito</h6>
+                            <span>$15.000</span>    
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center">
+                            <span><i class="fa-solid fa-money-bill-transfer"></i></span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
