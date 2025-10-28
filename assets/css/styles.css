@@ -614,7 +614,7 @@ footer {
 }
 
 /* MediaQuery para dispositivos por encima de tablets*/
-@media (min-width: 1024px) and (min-width: 1399px) {
+@media (min-width: 1024px) and (max-width: 1399px) {
     ul {
         padding-left: 2rem;
     }
@@ -671,12 +671,46 @@ footer {
 }
 
 @media (min-width: 1400px) {
+    ul {
+        padding-left: 2rem;
+    }
+
+    header {
+
+        & a {
+            font-size: 1.05rem !important;
+
+            & i {
+                font-size: 1.7rem;
+            }
+
+            &+.notification {
+                bottom: 24px;
+            }
+        }
+    }
+
     .hamb-banner {
         & .img-banner {
             & .burguerOut {
-                background-size: auto !important;
+                background-size: auto;
+                width: 50vw;
+                height: 72vh;
+                transform: rotate(11deg);
+            }
+
+            & .brand {
+                font-size: 8rem;
+                font-style: normal;
+                top: 25%;
+                left: 8%;
             }
         }
+    }
+
+    h2 {
+        font-size: 3rem;
+        margin: 6.5rem 0 6.5rem 0;
     }
 
     .food-1 {
