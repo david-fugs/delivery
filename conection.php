@@ -4,7 +4,8 @@
         $user = "root";
         $passwd = "";
         $db = "tinburguer";
-        $puerto = "3307";
+        $puerto = "3306"; //david
+        //$puerto = "3307"; //gio cambia a este puerto
 
         $conection = mysqli_connect($host, $user, $passwd, $db, $puerto);
         if(!$conection){
@@ -12,8 +13,7 @@
             exit();
         }
         return $conection;
-
-        echo "Conexion exitosa";
-        mysqli_close($conection);   
+        mysqli_close($conection);
+  
     }
 ?>

@@ -6,13 +6,15 @@
     --blanco: #ffffff;
     --red1: #e5383b;
     --star: #fdc500;
+    --success: #28a745;
+    --shadow: rgba(0, 0, 0, 0.1);
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "BBH Sans Hegarty", sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 400;
     font-style: normal;
 }
@@ -39,6 +41,11 @@ a {
 
 .color-second-title {
     color: var(--main2);
+}
+
+.text-main2 {
+    color: var(--main2);
+    font-weight: 600;
 }
 
 .my-100 {
@@ -74,12 +81,17 @@ form {
     }
 
     & input,
-    & a#btn-go-register,
-    & input#btn-register {
+    & button#btn-go-register,
+    & input#btn-register,
+    & textarea {
         padding: 10px;
         width: 100%;
         border: 1px solid #ccc;
         border-radius: 2rem;
+    }
+    
+    & textarea {
+        border-radius: 1rem;
     }
 
     & input::placeholder {
@@ -89,15 +101,17 @@ form {
     }
 
     & input#btn-login,
-    & a#btn-go-register,
+    & button#btn-go-register,
     & input#btn-register {
         width: 50%;
         background-color: var(--main1);
         color: var(--blanco);
+        border: none;
+        cursor: pointer;
 
         &#btn-login:hover,
         &#btn-register:hover,
-        & a#btn-go-register:hover {
+        &:hover {
             background-color: var(--main2);
             cursor: pointer;
         }
@@ -121,10 +135,10 @@ header {
 
     & a {
         color: #58121e;
-        font-family: "BBH Sans Hegarty", sans-serif;
-        font-weight: 400;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-weight: 500;
         font-style: normal;
-        font-size: .8rem !important;
+        font-size: .9rem !important;
         display: flex;
         align-items: center;
         cursor: pointer;
@@ -144,7 +158,7 @@ header {
             display: block;
             color: var(--blanco);
             font-size: 8px;
-            font-family: "BBH Sans Hegarty", sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             font-weight: 400;
             display: flex;
             justify-content: center;
@@ -183,7 +197,7 @@ header {
         & .brand {
             position: absolute;
             font-size: 3.5rem;
-            font-family: "BBH Sans Hegarty", sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             font-weight: 400;
             font-style: normal;
             color: var(--main2);
@@ -195,10 +209,10 @@ header {
 }
 
 h2 {
-    font-size: 2rem;
-    font-family: "BBH Sans Hegarty", sans-serif;
+    font-size: 2.2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-optical-sizing: auto;
-    font-weight: 400;
+    font-weight: 600;
     font-style: normal;
     color: var(--main1);
     margin: 4.5rem 0 4.5rem 0;
@@ -270,7 +284,7 @@ h2 {
         padding: 0 0 15px 15px;
         color: var(--blanco);
         font-size: 1.5rem;
-        font-family: "BBH Sans Hegarty", sans-serif;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         font-weight: 400;
         font-style: normal;
         filter: drop-shadow(4px 6px 2px black)
@@ -280,7 +294,7 @@ h2 {
 .carousel-inner {
     height: 70vh;
     border-radius: 10px;
-    font-family: "BBH Sans Hegarty", sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 400;
     font-style: normal;
     color: var(--blanco);
@@ -383,7 +397,7 @@ h2 {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    font-family: "BBH Sans Hegarty", sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 400;
     font-style: normal;
     color: var(--main1);
@@ -410,7 +424,7 @@ footer {
     color: var(--blanco);
     text-align: center;
     /* padding: 15px 0 15px 0; */
-    font-family: "BBH Sans Hegarty", sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 400;
     font-style: normal;
 
@@ -602,7 +616,7 @@ footer {
                 display: block;
                 font-size: .4em;
                 font-weight: 400;
-                font-family: "BBH Sans Hegarty", sans-serif;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
                 color: var(--blanco);
                 position: absolute;
                 bottom: -15px;
@@ -732,4 +746,451 @@ footer {
     .baner-promotions {
         height: 200px;
     }
+}
+
+/* ============================================
+   ESTILOS PARA PRODUCTOS
+   ============================================ */
+
+.product-card {
+    background-color: var(--blanco);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px var(--shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.product-img {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+}
+
+.product-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-img img {
+    transform: scale(1.1);
+}
+
+.product-info {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-name {
+    color: var(--main1);
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.product-description {
+    color: #666;
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+    flex: 1;
+    line-height: 1.5;
+}
+
+.product-footer {
+    margin-top: auto;
+}
+
+.product-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--main2);
+}
+
+.btn-add-cart {
+    background-color: var(--main1);
+    color: var(--blanco);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn-add-cart:hover:not(.disabled) {
+    background-color: var(--main2);
+    transform: scale(1.05);
+}
+
+.btn-add-cart.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.btn-add-cart i {
+    font-size: 1rem;
+}
+
+/* ============================================
+   ESTILOS PARA EL CARRITO
+   ============================================ */
+
+.cart-modal .cart-container,
+.checkout-modal .checkout-container {
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.cart-items {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    gap: 15px;
+}
+
+.cart-item-info {
+    flex: 1;
+}
+
+.cart-item-info h6 {
+    margin: 0;
+    color: var(--main1);
+    font-size: 1rem;
+}
+
+.cart-item-price {
+    color: #666;
+    font-size: 0.85rem;
+    margin: 5px 0 0 0;
+}
+
+.cart-item-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-qty {
+    background-color: var(--main2);
+    color: var(--blanco);
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.btn-qty:hover {
+    background-color: var(--main1);
+    transform: scale(1.1);
+}
+
+.cart-item-qty {
+    font-weight: 600;
+    min-width: 30px;
+    text-align: center;
+}
+
+.btn-remove {
+    background-color: var(--red1);
+    color: var(--blanco);
+    border: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.btn-remove:hover {
+    background-color: #c82333;
+    transform: scale(1.1);
+}
+
+.cart-item-subtotal {
+    font-weight: 700;
+    color: var(--main1);
+    min-width: 100px;
+    text-align: right;
+}
+
+.cart-footer {
+    border-top: 2px solid var(--main1);
+    padding-top: 20px;
+    margin-top: 20px;
+}
+
+.cart-total {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.cart-total h4 {
+    color: var(--main1);
+    font-size: 1.5rem;
+}
+
+.btn-checkout {
+    width: 100%;
+    background-color: var(--success);
+    color: var(--blanco);
+    border: none;
+    padding: 15px;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-checkout:hover {
+    background-color: #218838;
+    transform: scale(1.02);
+}
+
+/* ============================================
+   ESTILOS PARA CHECKOUT
+   ============================================ */
+
+.checkout-container textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--main1);
+    border-radius: 10px;
+    resize: vertical;
+    font-family: inherit;
+}
+
+.payment-section {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+}
+
+.payment-section h5 {
+    color: var(--main1);
+    margin-bottom: 15px;
+}
+
+.payment-options {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.payment-option {
+    flex: 1;
+    min-width: 200px;
+    padding: 15px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.payment-option:hover {
+    border-color: var(--main2);
+    background-color: #fff;
+}
+
+.payment-option input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.payment-option input[type="radio"]:checked + span {
+    color: var(--main1);
+    font-weight: 600;
+}
+
+.checkout-summary {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.checkout-summary h5 {
+    color: var(--main1);
+    margin-bottom: 15px;
+}
+
+.checkout-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.checkout-total {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 2px solid var(--main1);
+    text-align: right;
+    font-size: 1.3rem;
+    color: var(--main1);
+}
+
+.btn-confirm-order {
+    width: 100%;
+    background-color: var(--main1);
+    color: var(--blanco);
+    border: none;
+    padding: 15px;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-confirm-order:hover {
+    background-color: var(--main2);
+    transform: scale(1.02);
+}
+
+/* ============================================
+   NOTIFICACIONES
+   ============================================ */
+
+.cart-notification {
+    position: fixed;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--success);
+    color: var(--blanco);
+    padding: 15px 30px;
+    border-radius: 25px;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 10000;
+    transition: bottom 0.3s ease;
+}
+
+.cart-notification.show {
+    bottom: 30px;
+}
+
+/* ============================================
+   TABLA DE INVENTARIO
+   ============================================ */
+
+.table-inventory {
+    background-color: var(--blanco);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px var(--shadow);
+}
+
+.table-inventory table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-inventory th {
+    background-color: var(--main1);
+    color: var(--blanco);
+    padding: 15px;
+    text-align: left;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.table-inventory td {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    font-size: 0.95rem;
+}
+
+.table-inventory tr:hover {
+    background-color: #f8f9fa;
+}
+
+.btn-action {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin: 0 5px;
+    transition: all 0.3s ease;
+}
+
+.btn-edit {
+    background-color: var(--main2);
+    color: var(--blanco);
+}
+
+.btn-edit:hover {
+    background-color: #b88906;
+}
+
+.btn-delete {
+    background-color: var(--red1);
+    color: var(--blanco);
+}
+
+.btn-delete:hover {
+    background-color: #c82333;
+}
+
+.btn-primary {
+    background-color: var(--main1);
+    color: var(--blanco);
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--main2);
+    transform: scale(1.05);
 }
