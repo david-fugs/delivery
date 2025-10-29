@@ -5,6 +5,6 @@
         exit();
     } else {
         header("location: index.php");
-        echo "regrese al inicio"
+        echo "regrese al inicio";
     }
 ?>
