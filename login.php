@@ -10,7 +10,7 @@
         } else {
             $email = $_POST["email"];
             $passwd = $_POST["contrasena"];
-            $roles = [1 => "main_admin.php", 2 => "index.php"];
+            $roles = [1 => "main_admin.php", 2 => "main_user_dash.php"];
             
             $sql = $mysqli->prepare("SELECT * FROM usuarios WHERE email = ? AND contrasena = ?");
             $sql->bind_param("ss", $email, $passwd);

@@ -44,23 +44,6 @@
                                         <a href="log_out.php" class="px-3" title="Cerrar Sesión"><i class="fa-solid fa-right-from-bracket px-2"></i></a>
                                     </li>
                                 </ul>
-                            <?php elseif($is_logged && $user_rol == 2): ?>
-                                <!-- Navbar para Usuario -->
-                                <ul class="d-flex align-items-center">
-                                    <li>
-                                        <a href="#menu" class="px-3">Hacer un pedido <i class="fa-solid fa-truck px-2"></i></a>
-                                    </li>
-                                    <li>
-                                        <span class="px-3 text-main2">Hola, <?php echo htmlspecialchars($user_name); ?></span>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="px-3" id="cartIcon"><i class="fa-solid fa-cart-shopping px-2"></i></a>
-                                        <span class="notification" id="cartCount">0</span>
-                                    </li>
-                                    <li>
-                                        <a href="log_out.php" class="px-3" title="Cerrar Sesión"><i class="fa-solid fa-right-from-bracket px-2"></i></a>
-                                    </li>
-                                </ul>
                             <?php else: ?>
                                 <!-- Navbar para visitantes (no logueados) -->
                                 <ul class="d-flex align-items-center">
@@ -284,6 +267,16 @@
                             <div class="data-users w-100">
                                 <label for="" class="d-flex flex-column justify-content-center text-start">Apellido
                                     <input class="my-3" type="text" name="user_last_name" placeholder="Ingresa tu apellido" required>
+                                </label>
+                            </div>
+                            <div class="data-users w-100">
+                                <label for="" class="d-flex flex-column justify-content-center text-start">Telefono
+                                    <input class="my-3" type="text" name="telefono" placeholder="Telefono" required>
+                                </label>
+                            </div>
+                            <div class="data-users w-100">
+                                <label for="" class="d-flex flex-column justify-content-center text-start">Dirección
+                                    <input class="my-3" type="text" name="direccion" placeholder="Ingresa tu apellido" required>
                                 </label>
                             </div>
                             <div class="data-users w-100">
