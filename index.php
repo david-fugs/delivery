@@ -292,7 +292,7 @@
                             <div id="register-message" class="mt-2"></div>
                             <div class="buttonsForm d-flex w-auto">
                                 <input type="submit" value="Registrarse" id="btn-register" name="btn-register" class="mt-4 mx-2">
-                                <button type="button" class="mt-4 mx-2" onclick="switchModal('registerModal', 'loginModal')">Ya tengo cuenta</button>
+                                <button type="button" class="mt-4 mx-2" id="btn-have-count" onclick="switchModal('registerModal', 'loginModal')">Ya tengo cuenta</button>
                             </div>
                         </fieldset>
                     </div>

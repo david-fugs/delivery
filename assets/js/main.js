@@ -29,7 +29,7 @@ if (loginBtn) {
 }
 
 // Cerrar modal al hacer click en el fondo
-document.querySelector('.bg-opacity')?.addEventListener('click', function() {
+document.querySelector('.bg-opacity')?.addEventListener('click', function () {
     closeModal('loginModal');
     closeModal('registerModal');
     closeModal('cartModal');
@@ -55,7 +55,7 @@ function updateCartCount() {
 // Agregar producto al carrito
 function addToCart(productId, productName, productPrice) {
     const existingItem = cart.find(item => item.id === productId);
-    
+
     if (existingItem) {
         existingItem.quantity++;
     } else {
@@ -66,7 +66,7 @@ function addToCart(productId, productName, productPrice) {
             quantity: 1
         });
     }
-    
+
     localStorage.setItem('tinburger_cart', JSON.stringify(cart));
     updateCartCount();
     showCartNotification('Producto agregado al carrito');
@@ -98,20 +98,20 @@ function updateQuantity(productId, change) {
 function displayCart() {
     const cartItemsContainer = document.getElementById('cartItems');
     const cartTotal = document.getElementById('cartTotal');
-    
+
     if (cart.length === 0) {
         cartItemsContainer.innerHTML = '<p class="text-center">Tu carrito está vacío</p>';
         cartTotal.textContent = '0';
         return;
     }
-    
+
     let total = 0;
     let html = '';
-    
+
     cart.forEach(item => {
         const subtotal = item.price * item.quantity;
         total += subtotal;
-        
+
         html += `
             <div class="cart-item">
                 <div class="cart-item-info">
@@ -136,7 +136,7 @@ function displayCart() {
             </div>
         `;
     });
-    
+
     cartItemsContainer.innerHTML = html;
     cartTotal.textContent = total.toLocaleString('es-CO');
     updateCartCount();
@@ -148,13 +148,13 @@ function showCheckoutForm() {
         alert('Tu carrito está vacío');
         return;
     }
-    
+
     closeModal('cartModal');
     setTimeout(() => {
         // Llenar resumen de checkout
         let summaryHtml = '';
         let total = 0;
-        
+
         cart.forEach(item => {
             const subtotal = item.price * item.quantity;
             total += subtotal;
@@ -165,11 +165,11 @@ function showCheckoutForm() {
                 </div>
             `;
         });
-        
+
         document.getElementById('checkoutSummary').innerHTML = summaryHtml;
         document.getElementById('checkoutTotal').textContent = total.toLocaleString('es-CO');
         document.getElementById('cartData').value = JSON.stringify(cart);
-        
+
         openModal('checkoutModal');
     }, 200);
 }
@@ -180,7 +180,7 @@ function showCartNotification(message) {
     notification.className = 'cart-notification';
     notification.textContent = message;
     document.body.appendChild(notification);
-    
+
     setTimeout(() => notification.classList.add('show'), 100);
     setTimeout(() => {
         notification.classList.remove('show');
@@ -189,33 +189,33 @@ function showCartNotification(message) {
 }
 
 // Event listeners para botones de agregar al carrito
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     updateCartCount();
-    
+
     // Botones de agregar al carrito
     document.querySelectorAll('.btn-add-cart:not(.disabled)').forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             const productId = parseInt(this.dataset.id);
             const productName = this.dataset.name;
             const productPrice = parseFloat(this.dataset.price);
             addToCart(productId, productName, productPrice);
         });
     });
-    
+
     // Botón del carrito
     const cartIcon = document.getElementById('cartIcon');
     if (cartIcon) {
-        cartIcon.addEventListener('click', function(e) {
+        cartIcon.addEventListener('click', function (e) {
             e.preventDefault();
             displayCart();
             openModal('cartModal');
         });
     }
-    
+
     // Carrito deshabilitado para no logueados
     const cartIconDisabled = document.getElementById('cartIconDisabled');
     if (cartIconDisabled) {
-        cartIconDisabled.addEventListener('click', function(e) {
+        cartIconDisabled.addEventListener('click', function (e) {
             e.preventDefault();
             alert('Debes iniciar sesión para ver el carrito');
         });
@@ -228,32 +228,32 @@ document.addEventListener('DOMContentLoaded', function() {
 
 const formRegister = document.getElementById('formRegister');
 if (formRegister) {
-    formRegister.addEventListener('submit', function(e) {
+    formRegister.addEventListener('submit', function (e) {
         e.preventDefault();
-        
+
         const formData = new FormData(this);
-        
+
         fetch('register.php', {
             method: 'POST',
             body: formData
         })
-        .then(response => response.text())
-        .then(data => {
-            const messageDiv = document.getElementById('register-message');
-            messageDiv.innerHTML = data;
-            
-            // Si el registro fue exitoso, cambiar a login después de 2 segundos
-            if (data.includes('exitoso')) {
-                setTimeout(() => {
-                    switchModal('registerModal', 'loginModal');
-                }, 2000);
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            document.getElementById('register-message').innerHTML = 
-                '<div class="alert alert-danger">Error en el registro</div>';
-        });
+            .then(response => response.text())
+            .then(data => {
+                const messageDiv = document.getElementById('register-message');
+                messageDiv.innerHTML = data;
+
+                // Si el registro fue exitoso, cambiar a login después de 2 segundos
+                if (data.includes('exitoso')) {
+                    setTimeout(() => {
+                        switchModal('registerModal', 'loginModal');
+                    }, 2000);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('register-message').innerHTML =
+                    '<div class="alert alert-danger">Error en el registro</div>';
+            });
     });
 }
 
@@ -297,4 +297,20 @@ if (optionSideMenu.length > 0) {
             item.classList.add("active");
         });
     });
+}
+
+// Función inicialización maps
+let map
+async function initMap() {
+    const { Map } = await google.maps.importLibrary("maps")
+    let coordenadas = { lat: 4.8480277, lng: -75.6705499 } //Coordendas quemadas
+    map = new Map(document.getElementById("user-map"), {
+        center: coordenadas,
+        zoom: 8
+    })
+    // Marcador de posición
+    let marker = new google.maps.Marker({
+        position: coordenadas,
+        map: map
+    })
 }

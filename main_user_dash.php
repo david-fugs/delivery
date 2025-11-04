@@ -39,7 +39,7 @@
                 <div class="col-md-2 left-side-menu"><!-- menu lateral izquierdo -->
                     <div class="side-menu sections">
                         <h5 class=" color-txt-main2 text-center my-5">TinBurguer</h5>
-                        <ul class="px-4 pb-5">
+                        <ul class="user-right-menu px-xxl-4 pb-5">
                             <li class="option-side-menu py-3 my-2 px-4 active">
                                 <i class="fa-solid fa-house pe-3"></i>
                                 <a href="#" class="mx-2">Incio</a>
@@ -185,6 +185,9 @@
                             <span><i class="fa-solid fa-money-bill-transfer"></i></span>
                         </div>
                     </div>
+                    <div id="user-map" class="my-5">
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -192,4 +195,5 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/7a0f7896d3.js" crossorigin="anonymous"></script>
 <script src="assets/js/main.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbcqOJPrZsXFWU5RRpvY99GQxE4G2rDok&callback=initMap"></script>
 </html>

@@ -83,6 +83,7 @@ form {
     & input,
     & button#btn-go-register,
     & input#btn-register,
+    & button#btn-have-count,
     & textarea {
         padding: 10px;
         width: 100%;
@@ -102,8 +103,10 @@ form {
 
     & input#btn-login,
     & button#btn-go-register,
-    & input#btn-register {
-        width: 50%;
+    & input#btn-register,
+    & button#btn-have-count {
+        /* width: 50%; */
+        width: auto;
         background-color: var(--main1);
         color: var(--blanco);
         border: none;
@@ -627,10 +630,15 @@ footer {
 
 }
 
+#user-map {
+    width: auto;
+    height: 400px;
+}
+
 /* MediaQuery para dispositivos por encima de tablets*/
 @media (min-width: 1024px) and (max-width: 1399px) {
-    ul {
-        padding-left: 2rem;
+    .user-right-menu {
+        padding-left: 0;
     }
 
     header {
@@ -689,6 +697,19 @@ footer {
         &>span {
             font-size: 1.5em;
         }
+    }
+
+    .user-categories {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+
+        &>li {
+            width: 100%;
+        }
+    }
+
+    .balance {
+        width: 100%;
     }
 }
 
