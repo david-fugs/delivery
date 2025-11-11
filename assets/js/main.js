@@ -299,18 +299,56 @@ if (optionSideMenu.length > 0) {
     });
 }
 
-// Función inicialización maps
+// Función global de inicialización API GoogleMaps
 let map
 async function initMap() {
     const { Map } = await google.maps.importLibrary("maps")
-    let coordenadas = { lat: 4.8480277, lng: -75.6705499 } //Coordendas quemadas
+    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker")
+    let coordenadas = { lat: 0, lng: 0 } //Coordendas quemadas en 0 para inicializar el mapa
     map = new Map(document.getElementById("user-map"), {
         center: coordenadas,
         zoom: 8
     })
-    // Marcador de posición
-    let marker = new google.maps.Marker({
-        position: coordenadas,
-        map: map
-    })
 }
+
+// Funcion para obtener la ubicación del usuario en tiempo real
+function getUserLocation() {
+    if (!navigator.geolocation) {
+        console.error("Geolocalización no soportada en este navegador");
+        return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+        function (position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            console.log("Latitud: " + latitude + ", Longitud: " + longitude);
+
+            // Centrar el mapa en la ubicación del usuario
+            map.setCenter({ lat: latitude, lng: longitude });
+            map.setZoom(15);
+
+            // Crear marcador con las coordenadas correctas del usuario 
+            let marker = new google.maps.Marker({
+                position: { lat: latitude, lng: longitude },
+                map: map,
+                title: "Mi ubicación actual"
+            });
+        },
+        function (error) { //Manejo de errores segun los permisos del navegador
+            console.error("Error de geolocalización: " + error.message);
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    console.error("Permiso de ubicación denegado");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    console.error("Información de ubicación no disponible");
+                    break;
+                case error.TIMEOUT:
+                    console.error("Tiempo de espera agotado");
+                    break;
+            }
+        }
+    );
+}
+getUserLocation();

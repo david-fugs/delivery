@@ -175,7 +175,7 @@
                     </div>
                 </div>
                 <div class="col-md-3 right-side-menu"><!-- menu lateral derecho -->
-                    <h5 class="color-main-title my-5 ms-3">Creditos...</h6>
+                    <h5 class="color-main-title my-5 ms-3">Tu Saldo...</h6>
                     <div class="balance d-flex align-items-center justify-content-center m-auto">
                         <div class="d-flex align-items-center justify-content-center flex-column me-3">
                             <h6>Tu credito</h6>
@@ -185,9 +185,8 @@
                             <span><i class="fa-solid fa-money-bill-transfer"></i></span>
                         </div>
                     </div>
-                    <div id="user-map" class="my-5">
-
-                    </div>
+                    <h5 class="color-main-title my-5 ms-3">Tu Ubicación...</h5>
+                    <div id="user-map" class="my-5"><!-- Visualizador del mapa --></div>
                 </div>
             </div>
         </div>
