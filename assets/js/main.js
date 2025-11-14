@@ -352,3 +352,11 @@ function getUserLocation() {
     );
 }
 getUserLocation();
+
+// Función para mostrar la fecha actual en el dashboard admin
+document.addEventListener('DOMContentLoaded', function () {
+    const currentDate = document.getElementById('currentDate');
+    const date = new Date();
+    const today = date.getDate() + ' / ' + (date.getMonth() + 1) + ' / ' + date.getFullYear();
+    currentDate.innerHTML = today;
+});
