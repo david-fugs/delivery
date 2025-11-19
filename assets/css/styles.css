@@ -7,6 +7,8 @@
     --red1: #e5383b;
     --star: #fdc500;
     --success: #28a745;
+    --error: #ff003d;
+    --progress: rgba(88, 18, 30, .5);
     --shadow: rgba(0, 0, 0, 0.1);
 }
 
@@ -635,140 +637,6 @@ footer {
     height: 400px;
 }
 
-/* MediaQuery para dispositivos por encima de tablets*/
-@media (min-width: 1024px) and (max-width: 1399px) {
-    .user-right-menu {
-        padding-left: 0;
-    }
-
-    header {
-
-        & a {
-            font-size: 1.05rem !important;
-
-            & i {
-                font-size: 1.7rem;
-            }
-
-            &+.notification {
-                bottom: 24px;
-            }
-        }
-    }
-
-    .hamb-banner {
-        max-width: 100vw;
-
-        & .img-banner {
-            & .burguerOut {
-                background-size: cover;
-                width: 50vw;
-                height: 72vh;
-                bottom: 0px;
-                right: -30px;
-                transform: rotate(11deg);
-            }
-
-            & .brand {
-                font-size: 8rem;
-                font-style: normal;
-                top: 25%;
-                left: 8%;
-            }
-        }
-    }
-
-    h2 {
-        font-size: 3rem;
-        margin: 6.5rem 0 6.5rem 0;
-    }
-
-    .food-1 {
-        min-height: 300px;
-    }
-
-    .food-3 {
-        min-height: 600px;
-    }
-
-    .baner-promotions {
-        height: 170px;
-
-        &>span {
-            font-size: 1.5em;
-        }
-    }
-
-    .user-categories {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 10px;
-
-        &>li {
-            width: 100%;
-        }
-    }
-
-    .balance {
-        width: 100%;
-    }
-}
-
-@media (min-width: 1400px) {
-    ul {
-        padding-left: 2rem;
-    }
-
-    header {
-
-        & a {
-            font-size: 1.05rem !important;
-
-            & i {
-                font-size: 1.7rem;
-            }
-
-            &+.notification {
-                bottom: 24px;
-            }
-        }
-    }
-
-    .hamb-banner {
-        & .img-banner {
-            & .burguerOut {
-                background-size: auto;
-                width: 50vw;
-                height: 72vh;
-                transform: rotate(11deg);
-            }
-
-            & .brand {
-                font-size: 8rem;
-                font-style: normal;
-                top: 25%;
-                left: 8%;
-            }
-        }
-    }
-
-    h2 {
-        font-size: 3rem;
-        margin: 6.5rem 0 6.5rem 0;
-    }
-
-    .food-1 {
-        min-height: 300px;
-    }
-
-    .food-3 {
-        min-height: 600px;
-    }
-
-    .baner-promotions {
-        height: 200px;
-    }
-}
-
 /* ============================================
    ESTILOS PARA PRODUCTOS
    ============================================ */
@@ -1214,4 +1082,177 @@ footer {
 .btn-primary:hover {
     background-color: var(--main2);
     transform: scale(1.05);
+}
+
+/* Estilos para el indicador circular de ingresos */
+
+.circle-container {
+    display: flex;
+    width: 200px;
+    border-radius: 8px;
+    background-color: var(--blanco);
+    row-gap: 30px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.circle-progress {
+    position: relative;
+    height: 160px;
+    width: 160px;
+    border-radius: 50%;
+    background: conic-gradient(var(--main2) 3.6deg, var(--main1) 0deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &::before {
+        content: '';
+        position: absolute;
+        height: 130px;
+        width: 130px;
+        border-radius: 50%;
+        background-color: var(--blanco);
+    }
+}
+
+.progress-value {
+    position: relative;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--main1);
+}
+
+/* MediaQuery para dispositivos por encima de tablets*/
+@media (min-width: 1024px) and (max-width: 1399px) {
+    .user-right-menu {
+        padding-left: 0;
+    }
+
+    header {
+
+        & a {
+            font-size: 1.05rem !important;
+
+            & i {
+                font-size: 1.7rem;
+            }
+
+            &+.notification {
+                bottom: 24px;
+            }
+        }
+    }
+
+    .hamb-banner {
+        max-width: 100vw;
+
+        & .img-banner {
+            & .burguerOut {
+                background-size: cover;
+                width: 50vw;
+                height: 72vh;
+                bottom: 0px;
+                right: -30px;
+                transform: rotate(11deg);
+            }
+
+            & .brand {
+                font-size: 8rem;
+                font-style: normal;
+                top: 25%;
+                left: 8%;
+            }
+        }
+    }
+
+    h2 {
+        font-size: 3rem;
+        margin: 6.5rem 0 6.5rem 0;
+    }
+
+    .food-1 {
+        min-height: 300px;
+    }
+
+    .food-3 {
+        min-height: 600px;
+    }
+
+    .baner-promotions {
+        height: 170px;
+
+        &>span {
+            font-size: 1.5em;
+        }
+    }
+
+    .user-categories {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+
+        &>li {
+            width: 100%;
+        }
+    }
+
+    .balance {
+        width: 100%;
+    }
+}
+
+@media (min-width: 1400px) {
+    ul {
+        padding-left: 2rem;
+    }
+
+    header {
+
+        & a {
+            font-size: 1.05rem !important;
+
+            & i {
+                font-size: 1.7rem;
+            }
+
+            &+.notification {
+                bottom: 24px;
+            }
+        }
+    }
+
+    .hamb-banner {
+        & .img-banner {
+            & .burguerOut {
+                background-size: auto;
+                width: 50vw;
+                height: 72vh;
+                transform: rotate(11deg);
+            }
+
+            & .brand {
+                font-size: 8rem;
+                font-style: normal;
+                top: 25%;
+                left: 8%;
+            }
+        }
+    }
+
+    h2 {
+        font-size: 3rem;
+        margin: 6.5rem 0 6.5rem 0;
+    }
+
+    .food-1 {
+        min-height: 300px;
+    }
+
+    .food-3 {
+        min-height: 600px;
+    }
+
+    .baner-promotions {
+        height: 200px;
+    }
 }

@@ -147,7 +147,7 @@ $result_inventario = $mysqli->query($sql_inventario);
     <div class="container my-5">
         <div class="row">
             <div class="col-12">
-                <h1 class="text-center mb-4"><i class="fa-solid fa-boxes-stacked"></i> Gestión de Inventario</h1>
+                <h2 class="text-center mb-4"><i class="fa-solid fa-boxes-stacked"></i> Gestión de Inventario</h2>
                 
                 <?php if (isset($mensaje)): ?>
                 <div class="alert alert-<?php echo $tipo_mensaje; ?> alert-dismissible fade show" role="alert">

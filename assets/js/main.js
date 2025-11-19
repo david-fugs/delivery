@@ -360,3 +360,29 @@ document.addEventListener('DOMContentLoaded', function () {
     const today = date.getDate() + ' / ' + (date.getMonth() + 1) + ' / ' + date.getFullYear();
     currentDate.innerHTML = today;
 });
+
+/* let totalAmount = document.getElementById('totalAmount')
+const valueTotalAmount = totalAmount.textContent; */
+
+// Función para animar el indicador circular de ingresos acumulados
+let circularProgress = document.querySelector('.circle-progress'),
+    progressValue = document.querySelector('.progress-value');
+
+let progressStartValue = 0,
+    progressEndValue = 100, // Valor final del progreso (porcentaje)
+    speed = 20; // Velocidad de la animación    
+
+let progress = setInterval(() => {
+    progressStartValue++;
+    progressValue.textContent = `${progressStartValue}%`;
+    if (progressStartValue <= 50) {
+        circularProgress.style.background = `conic-gradient(#ff003d ${progressStartValue * 3.6}deg, rgba(88, 18, 30, .3) ${progressStartValue * 3.6}deg)`;
+    }
+    if (progressStartValue >= 50) {
+        circularProgress.style.background = `conic-gradient(#28a745 ${progressStartValue * 3.6}deg, rgba(88, 18, 30, .3) ${progressStartValue * 3.6}deg)`;
+    }
+    if (progressStartValue == progressEndValue) {
+        clearInterval(progress);
+    }
+
+}, speed)

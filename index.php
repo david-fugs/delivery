@@ -137,8 +137,8 @@
                     <div class="product-card">
                         <div class="product-img">
                             <img src="assets/img/<?php echo htmlspecialchars($img_producto); ?>" 
-                                 alt="<?php echo htmlspecialchars($producto['nombre_producto']); ?>"
-                                 onerror="this.src='assets/img/placeholder.jpg'">
+                                alt="<?php echo htmlspecialchars($producto['nombre_producto']); ?>"
+                                onerror="this.src='assets/img/placeholder.jpg'">
                         </div>
                         <div class="product-info">
                             <h5 class="product-name"><?php echo htmlspecialchars($producto['nombre_producto']); ?></h5>

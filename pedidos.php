@@ -75,7 +75,7 @@ $result_pedidos = $mysqli->query($sql_pedidos);
     <div class="container my-5">
         <div class="row">
             <div class="col-12">
-                <h1 class="text-center mb-4"><i class="fa-solid fa-clipboard-list"></i> Gestión de Pedidos</h1>
+                <h2 class="text-center mb-4"><i class="fa-solid fa-clipboard-list"></i> Gestión de Pedidos</h2>
                 
                 <?php if (isset($mensaje)): ?>
                 <div class="alert alert-<?php echo $tipo_mensaje; ?> alert-dismissible fade show" role="alert">

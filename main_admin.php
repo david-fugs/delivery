@@ -42,9 +42,6 @@
             margin-bottom: 20px;
             transition: transform 0.3s ease;
         }
-        .dashboard-card:hover {
-            transform: translateY(-5px);
-        }
         .stat-icon {
             font-size: 3rem;
             opacity: 0.2;
@@ -55,7 +52,6 @@
         .stat-number {
             font-size: 2.5rem;
             font-weight: 700;
-            color: var(--main1);
         }
         .stat-label {
             color: #666;
@@ -89,10 +85,10 @@
     <div class="container-fluid my-5">
         <div class="row">
             <div class="col-12">
-                <h1 class="text-center mb-5">
+                <h2 class="text-center mb-5">
                     <i class="fa-solid fa-gauge"></i> Panel de Administración
-                </h1>
-                <p class="text-center lead mb-5">¡ Hola de nuevo ! <?php echo htmlspecialchars($_SESSION["user_name"])?></p>
+                </h2>
+                <h4 class="color-second-title text-center lead mb-5">¡ Hola de nuevo ! <?php echo htmlspecialchars($_SESSION["user_name"])?></h4>
             </div>
         </div>
         <div class="row">
@@ -102,43 +98,50 @@
                         <div class="col-md-6 col-lg-3">
                             <div class="dashboard-card position-relative">
                                 <i class="fa-solid fa-shopping-cart stat-icon"></i>
-                                <div class="stat-number"><?php echo $total_pedidos; ?></div>
+                                <div class="stat-number color-main-title"><?php echo $total_pedidos; ?></div>
                                 <div class="stat-label">Total Pedidos</div>
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-3">
                             <div class="dashboard-card position-relative">
                                 <i class="fa-solid fa-calendar-day stat-icon"></i>
-                                <div class="stat-number"><?php echo $pedidos_hoy; ?></div>
+                                <div class="stat-number color-main-title"><?php echo $pedidos_hoy; ?></div>
                                 <div class="stat-label">Pedidos Hoy</div>
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-3">
                             <div class="dashboard-card position-relative">
                                 <i class="fa-solid fa-users stat-icon"></i>
-                                <div class="stat-number"><?php echo $total_usuarios; ?></div>
+                                <div class="stat-number color-main-title"><?php echo $total_usuarios; ?></div>
                                 <div class="stat-label">Usuarios Registrados</div>
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-3">
                             <div class="dashboard-card position-relative">
                                 <i class="fa-solid fa-box stat-icon"></i>
-                                <div class="stat-number"><?php echo $total_productos; ?></div>
+                                <div class="stat-number color-main-title"><?php echo $total_productos; ?></div>
                                 <div class="stat-label">Productos Activos</div>
                             </div>
                         </div>
                     </div>
                     <div class="row mt-4">
                         <div class="col-md-6">
-                            <div class="dashboard-card">
-                                <h4 class="mb-3"><i class="fa-solid fa-dollar-sign"></i> Ingresos Acumulados</h4>
-                                <div class="stat-number text-success">$<?php echo number_format($ingresos_mes, 0, ',', '.'); ?></div>
-                                <p id="currentDate"></p>
+                            <div class="dashboard-card d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h4 class="color-main-title mb-3"><i class="fa-solid fa-dollar-sign"></i> Ingresos Acumulados</h4>
+                                    <div class="stat-number color-second-title" id="totalAmount">$<?php echo number_format($ingresos_mes, 0, ',', '.'); ?></div>
+                                    <p class="color-main-title" id="currentDate"></p>
+                                </div>
+                                <div class="circle-container">
+                                    <div class="circle-progress">
+                                        <span class="progress-value"></span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="dashboard-card">
-                                <h5 class="mb-4"><i class="fa-solid fa-bell"></i> Últimos Pedidos</h5>
+                                <h5 class="color-main-title mb-4"><i class="fa-solid fa-bell"></i> Últimos Pedidos</h5>
                                 <?php
                                 $sql_ultimos = "SELECT p.id_pedido, p.nombre_cliente, p.total, p.estado_pedido, p.fecha_creacion 
                                                 FROM pedidos p 
@@ -151,7 +154,7 @@
                                         <?php while ($pedido = $result_ultimos->fetch_assoc()): ?>
                                             <div class="list-group-item">
                                                 <div class="d-flex justify-content-between">
-                                                    <strong>#<?php echo $pedido['id_pedido']; ?> - <?php echo htmlspecialchars($pedido['nombre_cliente']); ?></strong>
+                                                    <strong class="color-main-title">#<?php echo $pedido['id_pedido']; ?> - <?php echo htmlspecialchars($pedido['nombre_cliente']); ?></strong>
                                                     <span class="badge bg-primary"><?php echo $pedido['estado_pedido']; ?></span>
                                                 </div>
                                                 <small class="text-muted">
@@ -174,15 +177,15 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="dashboard-card">
-                                <h5 class="mb-4"><i class="fa-solid fa-clock"></i> Accesos Rápidos</h5>
+                                <h5 class="color-main-title mb-4"><i class="fa-solid fa-clock"></i> Accesos Rápidos</h5>
                                 <div class="d-grid gap-2">
-                                    <a href="inventario.php" class="btn btn-outline-primary">
+                                    <a href="inventario.php" class="btn btn-outline-secondary">
                                         <i class="fa-solid fa-boxes-stacked"></i> Gestionar Inventario
                                     </a>
-                                    <a href="pedidos.php" class="btn btn-outline-primary">
+                                    <a href="pedidos.php" class="btn btn-outline-secondary">
                                         <i class="fa-solid fa-clipboard-list"></i> Ver Pedidos
                                     </a>
-                                    <a href="usuarios.php" class="btn btn-outline-primary">
+                                    <a href="usuarios.php" class="btn btn-outline-secondary">
                                         <i class="fa-solid fa-users-gear"></i> Control de Usuarios
                                     </a>
                                 </div>

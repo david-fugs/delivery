@@ -91,7 +91,7 @@ $result_usuarios = $mysqli->query($sql_usuarios);
     <div class="container my-5">
         <div class="row">
             <div class="col-12">
-                <h1 class="text-center mb-4"><i class="fa-solid fa-users"></i> Control de Usuarios</h1>
+                <h2 class="text-center mb-4"><i class="fa-solid fa-users"></i> Control de Usuarios</h2>
                 
                 <?php if (isset($mensaje)): ?>
                 <div class="alert alert-<?php echo $tipo_mensaje; ?> alert-dismissible fade show" role="alert">
