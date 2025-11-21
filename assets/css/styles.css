@@ -346,6 +346,17 @@ h2 {
 .left-side-menu,
 .right-side-menu {
     background-color: var(--blanco);
+    position: fixed;
+    height: 100vh;
+    max-height: 100vh;
+}
+
+.left-side-menu {
+    left: 0;
+}
+
+.right-side-menu {
+    right: 0;
 }
 
 .side-menu {
@@ -1207,6 +1218,15 @@ footer {
     }
 
     header {
+        &.head-user-dash {
+            position: sticky;
+            top: 0;
+        }
+
+        &.scrolled {
+            background-color: var(--blanco);
+            transition: all 0.3s ease;
+        }
 
         & a {
             font-size: 1.05rem !important;
@@ -1254,5 +1274,14 @@ footer {
 
     .baner-promotions {
         height: 200px;
+    }
+
+    .week-discounts {
+
+        & li {
+            & .likes {
+                font-size: 1.5em;
+            }
+        }
     }
 }

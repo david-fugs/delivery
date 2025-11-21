@@ -1,9 +1,23 @@
 <?php
     include('libs.php');
+    include('conection.php');
+    $mysqli = bd_conection();
+    session_start();
+    $sql = $mysqli->prepare("SELECT nombre_usuario, apellido_usuario FROM usuarios WHERE id_user = ?");
+    $sql->bind_param("i", $_SESSION["id_user"]);
+    $sql->execute();
+    $resultado = $sql->get_result();
+    if ($resultado && $datos = $resultado->fetch_object()) {
+        $_SESSION["apellido_usuario"] = $datos->apellido_usuario;
+        $_SESSION["nombre_usuario"] = $datos->nombre_usuario;
+    } else {
+        header("Location: index.php");
+        exit();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
-    <header class="pb-4">
+    <header class="head-user-dash pb-4">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
@@ -17,7 +31,7 @@
                                 <li>
                                     <a href="#" class="px-2"><i class="fa-solid fa-cart-shopping px-2"></i>
                                     </a>
-                                    <span class="notification">1</span>
+                                    <span class="notification">0</span>
                                 </li>
                                 <li><a href="#" class="px-2"><i class="fa-solid fa-user"></i></span></li>
                                 <li>
@@ -38,7 +52,8 @@
             <div class="row d-sm-none d-md-flex calc-h-80">
                 <div class="col-md-2 left-side-menu"><!-- menu lateral izquierdo -->
                     <div class="side-menu sections">
-                        <h5 class=" color-txt-main2 text-center my-5">TinBurguer</h5>
+                        <h5 class="color-txt-main2 text-center my-5">TinBurguer</h5>
+                        <h6 class="color-main-title mb-4 text-center"><?php echo htmlspecialchars($_SESSION["nombre_usuario"]) . " " . htmlspecialchars($_SESSION["apellido_usuario"])?></h6>
                         <ul class="user-right-menu px-xxl-4 pb-5">
                             <li class="option-side-menu py-3 my-2 px-4 active">
                                 <i class="fa-solid fa-house pe-3"></i>
@@ -63,7 +78,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-7"><!-- menu central principal -->
+                <div class="col-md-7 offset-md-2"><!-- menu central principal -->
                     <div class="container">
                         <div class="row">
                             <div class="col-12">
@@ -109,10 +124,10 @@
                             <div class="col-12">
                                 <h4 class="color-main-title my-5">Descuentos de la Semana</h4>
                                 <ul class="week-discounts">
-                                    <li class="d-flex flex-column justify-content-between">
+                                    <li class="d-flex flex-column justify-content-between mb-3">
                                         <div class="d-flex justify-content-between align-items-center pt-2 pe-4">
                                             <span class="discount">25% Off</span>
-                                            <span class="likes"><i class="fa-solid fa-heart"></i></span>
+                                            <span class="likes"><i class="fa-solid fa-cart-shopping px-2" aria-hidden="true"></i></span>
                                         </div>
                                         <div><img src="assets/img/bacon-cheese.png" alt="Hamburguesa Cheese Bacon" class="d-block m-auto"></div>
                                         <div class="info-prom ps-3 pb-2">
@@ -129,10 +144,10 @@
                                             </div>
                                         </div>
                                     </li>
-                                    <li class="d-flex flex-column justify-content-between">
+                                    <li class="d-flex flex-column justify-content-between mb-3">
                                         <div class="d-flex justify-content-between align-items-center pt-2 pe-4">
                                             <span class="discount">25% Off</span>
-                                            <span class="likes"><i class="fa-solid fa-heart"></i></span>
+                                            <span class="likes"><i class="fa-solid fa-cart-shopping px-2" aria-hidden="true"></i></span>
                                         </div>
                                         <div><img src="assets/img/doble-carne.png" alt="Hamburguesa doble carne" class="d-block m-auto"></div>
                                         <div class="info-prom ps-3 pb-2">
@@ -149,10 +164,130 @@
                                             </div>
                                         </div>
                                     </li>
-                                    <li class="d-flex flex-column justify-content-between">
+                                    <li class="d-flex flex-column justify-content-between mb-3">
                                         <div class="d-flex justify-content-between align-items-center pt-2 pe-4">
                                             <span class="discount">25% Off</span>
-                                            <span class="likes"><i class="fa-regular fa-heart"></i></span>
+                                            <span class="likes"><i class="fa-solid fa-cart-shopping px-2" aria-hidden="true"></i></i></span>
+                                        </div>
+                                        <div><img src="assets/img/queso-doble-carne.png" alt="Hmburguesa queso doble carne" class="d-block m-auto"></div>
+                                        <div class="info-prom ps-3 pb-2">
+                                            <div class="stars">
+                                                <span><i class="fa-solid fa-star"></i></span>
+                                                <span><i class="fa-solid fa-star"></i></span>
+                                                <span><i class="fa-solid fa-star"></i></span>
+                                                <span><i class="fa-regular fa-star"></i></span>
+                                                <span><i class="fa-regular fa-star"></i></span>
+                                            </div>
+                                            <div class="cost-name-ham">
+                                                <h6 class="color-main-title">Doble Queso</h6>
+                                                <span class="priceHamb"><b class="color-second-title">$</b>23.900</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="d-flex flex-column justify-content-between mb-3">
+                                        <div class="d-flex justify-content-between align-items-center pt-2 pe-4">
+                                            <span class="discount">15% Off</span>
+                                            <span class="likes"><i class="fa-solid fa-cart-shopping px-2" aria-hidden="true"></i></i></span>
+                                        </div>
+                                        <div><img src="assets/img/queso-doble-carne.png" alt="Hmburguesa queso doble carne" class="d-block m-auto"></div>
+                                        <div class="info-prom ps-3 pb-2">
+                                            <div class="stars">
+                                                <span><i class="fa-solid fa-star"></i></span>
+                                                <span><i class="fa-solid fa-star"></i></span>
+                                                <span><i class="fa-solid fa-star"></i></span>
+                                                <span><i class="fa-regular fa-star"></i></span>
+                                                <span><i class="fa-regular fa-star"></i></span>
+                                            </div>
+                                            <div class="cost-name-ham">
+                                                <h6 class="color-main-title">Doble Queso</h6>
+                                                <span class="priceHamb"><b class="color-second-title">$</b>23.900</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="d-flex flex-column justify-content-between mb-3">
+                                        <div class="d-flex justify-content-between align-items-center pt-2 pe-4">
+                                            <span class="discount">10% Off</span>
+                                            <span class="likes"><i class="fa-solid fa-cart-shopping px-2" aria-hidden="true"></i></i></span>
+                                        </div>
+                                        <div><img src="assets/img/queso-doble-carne.png" alt="Hmburguesa queso doble carne" class="d-block m-auto"></div>
+                                        <div class="info-prom ps-3 pb-2">
+                                            <div class="stars">
+                                                <span><i class="fa-solid fa-star"></i></span>
+                                                <span><i class="fa-solid fa-star"></i></span>
+                                                <span><i class="fa-solid fa-star"></i></span>
+                                                <span><i class="fa-regular fa-star"></i></span>
+                                                <span><i class="fa-regular fa-star"></i></span>
+                                            </div>
+                                            <div class="cost-name-ham">
+                                                <h6 class="color-main-title">Doble Queso</h6>
+                                                <span class="priceHamb"><b class="color-second-title">$</b>23.900</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="d-flex flex-column justify-content-between mb-3">
+                                        <div class="d-flex justify-content-between align-items-center pt-2 pe-4">
+                                            <span class="discount">30% Off</span>
+                                            <span class="likes"><i class="fa-solid fa-cart-shopping px-2" aria-hidden="true"></i></i></span>
+                                        </div>
+                                        <div><img src="assets/img/queso-doble-carne.png" alt="Hmburguesa queso doble carne" class="d-block m-auto"></div>
+                                        <div class="info-prom ps-3 pb-2">
+                                            <div class="stars">
+                                                <span><i class="fa-solid fa-star"></i></span>
+                                                <span><i class="fa-solid fa-star"></i></span>
+                                                <span><i class="fa-solid fa-star"></i></span>
+                                                <span><i class="fa-regular fa-star"></i></span>
+                                                <span><i class="fa-regular fa-star"></i></span>
+                                            </div>
+                                            <div class="cost-name-ham">
+                                                <h6 class="color-main-title">Doble Queso</h6>
+                                                <span class="priceHamb"><b class="color-second-title">$</b>23.900</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="d-flex flex-column justify-content-between mb-3">
+                                        <div class="d-flex justify-content-between align-items-center pt-2 pe-4">
+                                            <span class="discount">5% Off</span>
+                                            <span class="likes"><i class="fa-solid fa-cart-shopping px-2" aria-hidden="true"></i></i></span>
+                                        </div>
+                                        <div><img src="assets/img/queso-doble-carne.png" alt="Hmburguesa queso doble carne" class="d-block m-auto"></div>
+                                        <div class="info-prom ps-3 pb-2">
+                                            <div class="stars">
+                                                <span><i class="fa-solid fa-star"></i></span>
+                                                <span><i class="fa-solid fa-star"></i></span>
+                                                <span><i class="fa-solid fa-star"></i></span>
+                                                <span><i class="fa-regular fa-star"></i></span>
+                                                <span><i class="fa-regular fa-star"></i></span>
+                                            </div>
+                                            <div class="cost-name-ham">
+                                                <h6 class="color-main-title">Doble Queso</h6>
+                                                <span class="priceHamb"><b class="color-second-title">$</b>23.900</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="d-flex flex-column justify-content-between mb-3">
+                                        <div class="d-flex justify-content-between align-items-center pt-2 pe-4">
+                                            <span class="discount">20% Off</span>
+                                            <span class="likes"><i class="fa-solid fa-cart-shopping px-2" aria-hidden="true"></i></i></span>
+                                        </div>
+                                        <div><img src="assets/img/queso-doble-carne.png" alt="Hmburguesa queso doble carne" class="d-block m-auto"></div>
+                                        <div class="info-prom ps-3 pb-2">
+                                            <div class="stars">
+                                                <span><i class="fa-solid fa-star"></i></span>
+                                                <span><i class="fa-solid fa-star"></i></span>
+                                                <span><i class="fa-solid fa-star"></i></span>
+                                                <span><i class="fa-regular fa-star"></i></span>
+                                                <span><i class="fa-regular fa-star"></i></span>
+                                            </div>
+                                            <div class="cost-name-ham">
+                                                <h6 class="color-main-title">Doble Queso</h6>
+                                                <span class="priceHamb"><b class="color-second-title">$</b>23.900</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="d-flex flex-column justify-content-between mb-3">
+                                        <div class="d-flex justify-content-between align-items-center pt-2 pe-4">
+                                            <span class="discount">15% Off</span>
+                                            <span class="likes"><i class="fa-solid fa-cart-shopping px-2" aria-hidden="true"></i></i></span>
                                         </div>
                                         <div><img src="assets/img/queso-doble-carne.png" alt="Hmburguesa queso doble carne" class="d-block m-auto"></div>
                                         <div class="info-prom ps-3 pb-2">

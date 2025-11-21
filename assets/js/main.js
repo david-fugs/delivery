@@ -386,3 +386,13 @@ let progress = setInterval(() => {
     }
 
 }, speed)
+
+// Funcion para cambiar el color del header sticky user-dashboard
+window.addEventListener('scroll', function () {
+    const header = document.querySelector('.head-user-dash');
+    if (window.scrollY > 40) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
+})
