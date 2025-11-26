@@ -4,15 +4,19 @@
 
 // Función para abrir un modal específico
 function openModal(modalId) {
-    document.querySelector('.bg-opacity').classList.add('active');
-    document.getElementById(modalId).classList.add('active');
+    const bgOpacity = document.querySelector('.bg-opacity');
+    const modal = document.getElementById(modalId);
+    if (bgOpacity) bgOpacity.classList.add('active');
+    if (modal) modal.classList.add('active');
     document.body.style.overflow = 'hidden';
 }
 
 // Función para cerrar un modal específico
 function closeModal(modalId) {
-    document.querySelector('.bg-opacity').classList.remove('active');
-    document.getElementById(modalId).classList.remove('active');
+    const bgOpacity = document.querySelector('.bg-opacity');
+    const modal = document.getElementById(modalId);
+    if (bgOpacity) bgOpacity.classList.remove('active');
+    if (modal) modal.classList.remove('active');
     document.body.style.overflow = 'visible';
 }
 
@@ -302,19 +306,43 @@ if (optionSideMenu.length > 0) {
 // Función global de inicialización API GoogleMaps
 let map
 async function initMap() {
-    const { Map } = await google.maps.importLibrary("maps")
-    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker")
-    let coordenadas = { lat: 0, lng: 0 } //Coordendas quemadas en 0 para inicializar el mapa
-    map = new Map(document.getElementById("user-map"), {
-        center: coordenadas,
-        zoom: 8
-    })
+    const mapElement = document.getElementById("user-map");
+    if (!mapElement) {
+        console.log('Elemento user-map no encontrado');
+        return;
+    }
+    
+    try {
+        const { Map } = await google.maps.importLibrary("maps")
+        const { AdvancedMarkerElement } = await google.maps.importLibrary("marker")
+        let coordenadas = { lat: 0, lng: 0 } //Coordendas quemadas en 0 para inicializar el mapa
+        map = new Map(mapElement, {
+            center: coordenadas,
+            zoom: 8
+        })
+        // Intentar centrar el mapa en la ubicación del usuario después de inicializarlo
+        try {
+            // Llamamos a la función que obtiene la ubicación si está disponible
+            if (typeof getUserLocation === 'function') {
+                getUserLocation();
+            }
+        } catch (e) {
+            console.log('No se pudo obtener ubicación automáticamente:', e);
+        }
+    } catch (error) {
+        console.log('Error al cargar Google Maps:', error);
+    }
 }
 
 // Funcion para obtener la ubicación del usuario en tiempo real
 function getUserLocation() {
     if (!navigator.geolocation) {
-        console.error("Geolocalización no soportada en este navegador");
+        console.log("Geolocalización no soportada en este navegador");
+        return;
+    }
+
+    if (!map) {
+        console.log("Mapa no inicializado");
         return;
     }
 
@@ -336,29 +364,35 @@ function getUserLocation() {
             });
         },
         function (error) { //Manejo de errores segun los permisos del navegador
-            console.error("Error de geolocalización: " + error.message);
+            console.log("Error de geolocalización: " + error.message);
             switch (error.code) {
                 case error.PERMISSION_DENIED:
-                    console.error("Permiso de ubicación denegado");
+                    console.log("Permiso de ubicación denegado");
                     break;
                 case error.POSITION_UNAVAILABLE:
-                    console.error("Información de ubicación no disponible");
+                    console.log("Información de ubicación no disponible");
                     break;
                 case error.TIMEOUT:
-                    console.error("Tiempo de espera agotado");
+                    console.log("Tiempo de espera agotado");
                     break;
             }
         }
     );
 }
-getUserLocation();
+
+// Solo ejecutar si existe el elemento del mapa
+if (document.getElementById('user-map')) {
+    getUserLocation();
+}
 
 // Función para mostrar la fecha actual en el dashboard admin
 document.addEventListener('DOMContentLoaded', function () {
     const currentDate = document.getElementById('currentDate');
-    const date = new Date();
-    const today = date.getDate() + ' / ' + (date.getMonth() + 1) + ' / ' + date.getFullYear();
-    currentDate.innerHTML = today;
+    if (currentDate) {
+        const date = new Date();
+        const today = date.getDate() + ' / ' + (date.getMonth() + 1) + ' / ' + date.getFullYear();
+        currentDate.innerHTML = today;
+    }
 });
 
 /* let totalAmount = document.getElementById('totalAmount')
@@ -372,20 +406,23 @@ let progressStartValue = 0,
     progressEndValue = 100, // Valor final del progreso (porcentaje)
     speed = 20; // Velocidad de la animación    
 
-let progress = setInterval(() => {
-    progressStartValue++;
-    progressValue.textContent = `${progressStartValue}%`;
-    if (progressStartValue <= 50) {
-        circularProgress.style.background = `conic-gradient(#ff003d ${progressStartValue * 3.6}deg, rgba(88, 18, 30, .3) ${progressStartValue * 3.6}deg)`;
-    }
-    if (progressStartValue >= 50) {
-        circularProgress.style.background = `conic-gradient(#28a745 ${progressStartValue * 3.6}deg, rgba(88, 18, 30, .3) ${progressStartValue * 3.6}deg)`;
-    }
-    if (progressStartValue == progressEndValue) {
-        clearInterval(progress);
-    }
+// Solo ejecutar la animación si los elementos existen en el DOM
+if (circularProgress && progressValue) {
+    let progress = setInterval(() => {
+        progressStartValue++;
+        progressValue.textContent = `${progressStartValue}%`;
+        if (progressStartValue <= 50) {
+            circularProgress.style.background = `conic-gradient(#ff003d ${progressStartValue * 3.6}deg, rgba(88, 18, 30, .3) ${progressStartValue * 3.6}deg)`;
+        }
+        if (progressStartValue >= 50) {
+            circularProgress.style.background = `conic-gradient(#28a745 ${progressStartValue * 3.6}deg, rgba(88, 18, 30, .3) ${progressStartValue * 3.6}deg)`;
+        }
+        if (progressStartValue == progressEndValue) {
+            clearInterval(progress);
+        }
 
-}, speed)
+    }, speed);
+}
 
 // Funcion para cambiar el color del header sticky user-dashboard
 window.addEventListener('scroll', function () {

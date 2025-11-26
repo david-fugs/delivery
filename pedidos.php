@@ -15,9 +15,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_estado'])) {
     $id_pedido = intval($_POST['id_pedido']);
     $nuevo_estado = mysqli_real_escape_string($mysqli, $_POST['estado_pedido']);
     
-    $sql_update = "UPDATE pedidos SET estado_pedido = ? WHERE id_pedido = ?";
-    $stmt = $mysqli->prepare($sql_update);
-    $stmt->bind_param("si", $nuevo_estado, $id_pedido);
+    // Capturar ubicación del repartidor si se marca como "En Camino"
+    $latitud_repartidor = isset($_POST['latitud_repartidor']) ? floatval($_POST['latitud_repartidor']) : null;
+    $longitud_repartidor = isset($_POST['longitud_repartidor']) ? floatval($_POST['longitud_repartidor']) : null;
+    
+    if ($nuevo_estado == 'En Camino' && $latitud_repartidor && $longitud_repartidor) {
+        // Actualizar estado y guardar ubicación del repartidor
+        $sql_update = "UPDATE pedidos SET estado_pedido = ?, latitud_repartidor = ?, longitud_repartidor = ?, fecha_en_camino = NOW() WHERE id_pedido = ?";
+        $stmt = $mysqli->prepare($sql_update);
+        $stmt->bind_param("sddi", $nuevo_estado, $latitud_repartidor, $longitud_repartidor, $id_pedido);
+    } else {
+        // Actualizar solo el estado
+        $sql_update = "UPDATE pedidos SET estado_pedido = ? WHERE id_pedido = ?";
+        $stmt = $mysqli->prepare($sql_update);
+        $stmt->bind_param("si", $nuevo_estado, $id_pedido);
+    }
     
     if ($stmt->execute()) {
         // Si se marca como entregado, registrar fecha de entrega
@@ -27,8 +39,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_estado'])) {
             $stmt_entrega->bind_param("i", $id_pedido);
             $stmt_entrega->execute();
         }
-        $mensaje = "Estado del pedido actualizado";
+        $mensaje = "Estado del pedido actualizado correctamente";
         $tipo_mensaje = "success";
+    } else {
+        $mensaje = "Error al actualizar el estado";
+        $tipo_mensaje = "danger";
     }
 }
 
@@ -95,6 +110,7 @@ $result_pedidos = $mysqli->query($sql_pedidos);
                                 <th>Total</th>
                                 <th>Método Pago</th>
                                 <th>Estado</th>
+                                <th>Ubicaciones</th>
                                 <th>Fecha Creación</th>
                                 <th>Acciones</th>
                             </tr>
@@ -128,6 +144,27 @@ $result_pedidos = $mysqli->query($sql_pedidos);
                                         </span>
                                     </td>
                                     <td>
+                                        <?php if ($pedido['latitud'] && $pedido['longitud']): ?>
+                                            <a href="https://www.google.com/maps?q=<?php echo $pedido['latitud']; ?>,<?php echo $pedido['longitud']; ?>" 
+                                               target="_blank" 
+                                               class="btn btn-sm btn-success mb-1"
+                                               title="Ubicación del Cliente">
+                                                <i class="fa-solid fa-user"></i> Cliente
+                                            </a>
+                                        <?php endif; ?>
+                                        <?php if ($pedido['latitud_repartidor'] && $pedido['longitud_repartidor']): ?>
+                                            <a href="https://www.google.com/maps?q=<?php echo $pedido['latitud_repartidor']; ?>,<?php echo $pedido['longitud_repartidor']; ?>" 
+                                               target="_blank" 
+                                               class="btn btn-sm btn-primary mb-1"
+                                               title="Ubicación del Repartidor">
+                                                <i class="fa-solid fa-motorcycle"></i> Repartidor
+                                            </a>
+                                        <?php endif; ?>
+                                        <?php if ((!$pedido['latitud'] || !$pedido['longitud']) && (!$pedido['latitud_repartidor'] || !$pedido['longitud_repartidor'])): ?>
+                                            <small class="text-muted">Sin ubicaciones</small>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td>
                                         <?php echo date('d/m/Y', strtotime($pedido['fecha_creacion'])); ?><br>
                                         <small class="text-muted"><?php echo date('H:i', strtotime($pedido['fecha_creacion'])); ?></small>
                                     </td>
@@ -142,7 +179,7 @@ $result_pedidos = $mysqli->query($sql_pedidos);
                                 </tr>
                                 <?php endwhile; ?>
                             <?php else: ?>
-                                <tr><td colspan="9" class="text-center">No hay pedidos registrados</td></tr>
+                                <tr><td colspan="10" class="text-center">No hay pedidos registrados</td></tr>
                             <?php endif; ?>
                         </tbody>
                     </table>
@@ -178,10 +215,13 @@ $result_pedidos = $mysqli->query($sql_pedidos);
                     <h5 class="modal-title">Cambiar Estado del Pedido</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-                <form method="POST">
+                <form method="POST" id="formEstado">
                     <div class="modal-body">
                         <input type="hidden" name="update_estado" value="1">
                         <input type="hidden" name="id_pedido" id="estado_id_pedido">
+                        <input type="hidden" name="latitud_repartidor" id="latitud_repartidor">
+                        <input type="hidden" name="longitud_repartidor" id="longitud_repartidor">
+                        
                         <div class="mb-3">
                             <label class="form-label">Nuevo Estado</label>
                             <select class="form-control" name="estado_pedido" id="estado_select" required>
@@ -192,10 +232,15 @@ $result_pedidos = $mysqli->query($sql_pedidos);
                                 <option value="Cancelado">Cancelado</option>
                             </select>
                         </div>
+                        
+                        <div id="ubicacion_info" class="alert alert-info" style="display: none;">
+                            <i class="fa-solid fa-location-dot"></i> 
+                            <span id="ubicacion_mensaje">Capturando ubicación del repartidor...</span>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Actualizar</button>
+                        <button type="submit" class="btn btn-primary" id="btnActualizarEstado">Actualizar</button>
                     </div>
                 </form>
             </div>
@@ -205,6 +250,8 @@ $result_pedidos = $mysqli->query($sql_pedidos);
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/7a0f7896d3.js" crossorigin="anonymous"></script>
     <script>
+        let ubicacionCapturada = false;
+        
         function verDetalle(idPedido) {
             const modal = new bootstrap.Modal(document.getElementById('modalDetalle'));
             modal.show();
@@ -224,8 +271,72 @@ $result_pedidos = $mysqli->query($sql_pedidos);
         function cambiarEstado(idPedido, estadoActual) {
             document.getElementById('estado_id_pedido').value = idPedido;
             document.getElementById('estado_select').value = estadoActual;
+            document.getElementById('ubicacion_info').style.display = 'none';
+            ubicacionCapturada = false;
+            
+            // Limpiar ubicación previa
+            document.getElementById('latitud_repartidor').value = '';
+            document.getElementById('longitud_repartidor').value = '';
+            
             new bootstrap.Modal(document.getElementById('modalEstado')).show();
         }
+        
+        // Capturar ubicación cuando se seleccione "En Camino"
+        document.getElementById('estado_select').addEventListener('change', function() {
+            if (this.value === 'En Camino') {
+                document.getElementById('ubicacion_info').style.display = 'block';
+                document.getElementById('ubicacion_mensaje').textContent = 'Capturando ubicación del repartidor...';
+                document.getElementById('btnActualizarEstado').disabled = true;
+                
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                        function(position) {
+                            document.getElementById('latitud_repartidor').value = position.coords.latitude;
+                            document.getElementById('longitud_repartidor').value = position.coords.longitude;
+                            document.getElementById('ubicacion_mensaje').innerHTML = 
+                                '<i class="fa-solid fa-check-circle"></i> Ubicación capturada correctamente';
+                            document.getElementById('ubicacion_info').classList.remove('alert-info');
+                            document.getElementById('ubicacion_info').classList.add('alert-success');
+                            document.getElementById('btnActualizarEstado').disabled = false;
+                            ubicacionCapturada = true;
+                        },
+                        function(error) {
+                            document.getElementById('ubicacion_mensaje').innerHTML = 
+                                '<i class="fa-solid fa-exclamation-triangle"></i> No se pudo capturar la ubicación. ' +
+                                'Por favor, permite el acceso a tu ubicación.';
+                            document.getElementById('ubicacion_info').classList.remove('alert-info');
+                            document.getElementById('ubicacion_info').classList.add('alert-warning');
+                            document.getElementById('btnActualizarEstado').disabled = false;
+                        }
+                    );
+                } else {
+                    document.getElementById('ubicacion_mensaje').textContent = 
+                        'Tu navegador no soporta geolocalización';
+                    document.getElementById('ubicacion_info').classList.remove('alert-info');
+                    document.getElementById('ubicacion_info').classList.add('alert-danger');
+                    document.getElementById('btnActualizarEstado').disabled = false;
+                }
+            } else {
+                document.getElementById('ubicacion_info').style.display = 'none';
+                document.getElementById('btnActualizarEstado').disabled = false;
+            }
+        });
+        
+        // Validar antes de enviar el formulario
+        document.getElementById('formEstado').addEventListener('submit', function(e) {
+            const estadoSeleccionado = document.getElementById('estado_select').value;
+            
+            if (estadoSeleccionado === 'En Camino') {
+                const latitud = document.getElementById('latitud_repartidor').value;
+                const longitud = document.getElementById('longitud_repartidor').value;
+                
+                if (!latitud || !longitud) {
+                    e.preventDefault();
+                    alert('Para marcar como "En Camino" es necesario capturar la ubicación del repartidor.');
+                    return false;
+                }
+            }
+        });
     </script>
 </body>
 </html>

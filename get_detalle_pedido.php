@@ -61,6 +61,61 @@ if (isset($_GET['id'])) {
             </div>
         </div>
         
+        <!-- Ubicaciones -->
+        <?php if (($pedido['latitud'] && $pedido['longitud']) || ($pedido['latitud_repartidor'] && $pedido['longitud_repartidor'])): ?>
+        <div class="row mb-4">
+            <div class="col-12">
+                <h6><strong>Ubicaciones</strong></h6>
+            </div>
+            <?php if ($pedido['latitud'] && $pedido['longitud']): ?>
+            <div class="col-md-6 mb-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-title">
+                            <i class="fa-solid fa-user text-success"></i> Ubicación del Cliente
+                        </h6>
+                        <p class="mb-2"><small>Ubicación al realizar el pedido</small></p>
+                        <p class="mb-2">
+                            <strong>Coordenadas:</strong><br>
+                            Lat: <?php echo $pedido['latitud']; ?>, Lng: <?php echo $pedido['longitud']; ?>
+                        </p>
+                        <a href="https://www.google.com/maps?q=<?php echo $pedido['latitud']; ?>,<?php echo $pedido['longitud']; ?>" 
+                           target="_blank" 
+                           class="btn btn-sm btn-success">
+                            <i class="fa-solid fa-map-marker-alt"></i> Ver en Google Maps
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <?php endif; ?>
+            
+            <?php if ($pedido['latitud_repartidor'] && $pedido['longitud_repartidor']): ?>
+            <div class="col-md-6 mb-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-title">
+                            <i class="fa-solid fa-motorcycle text-primary"></i> Ubicación del Repartidor
+                        </h6>
+                        <p class="mb-2"><small>Ubicación al marcar "En Camino"</small></p>
+                        <p class="mb-2">
+                            <strong>Coordenadas:</strong><br>
+                            Lat: <?php echo $pedido['latitud_repartidor']; ?>, Lng: <?php echo $pedido['longitud_repartidor']; ?>
+                        </p>
+                        <?php if ($pedido['fecha_en_camino']): ?>
+                        <p class="mb-2"><small><strong>Fecha:</strong> <?php echo date('d/m/Y H:i', strtotime($pedido['fecha_en_camino'])); ?></small></p>
+                        <?php endif; ?>
+                        <a href="https://www.google.com/maps?q=<?php echo $pedido['latitud_repartidor']; ?>,<?php echo $pedido['longitud_repartidor']; ?>" 
+                           target="_blank" 
+                           class="btn btn-sm btn-primary">
+                            <i class="fa-solid fa-map-marker-alt"></i> Ver en Google Maps
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <?php endif; ?>
+        </div>
+        <?php endif; ?>
+        
         <h6><strong>Productos del Pedido</strong></h6>
         <table class="table table-striped">
             <thead>
